@@ -39,7 +39,12 @@ const placeReducer = (state = INITIAL_STATE, action) => {
         case Types.ADD_PLACE:
             return {
                 ...state,
-                places: [...state.places, { ...action.payload }],
+                places:
+                    state.places.find(
+                        (place) => place.name === action.payload.name
+                    )
+                        ? [...state.places]
+                        : [...state.places, { ...action.payload }],
             };
         case Types.REMOVE_PLACE:
             return {

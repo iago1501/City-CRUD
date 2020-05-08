@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Paper,
@@ -9,6 +10,8 @@ import {
 } from '@material-ui/core';
 
 import LocationActions from '../LocationActions';
+
+import { selectSearchedPlace, selectSearchedCity } from 'store/ducks/form';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -28,9 +31,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const LocationList = ({ location, changeLocale, selected, formType }) => {
+const LocationList = ({ locations, changeLocale, selected, formType }) => {
     const classes = useStyles();
     const [inputValue, setInputValue] = useState();
+    const searchedPlace = useSelector(selectSearchedPlace);
+    const searchedCity = useSelector(selectSearchedCity);
+
+    const filteredLocations =
+        formType === 'Place'
+            ? locations.filter((location) =>
+                  location.name
+                      .toLowerCase()
+                      .includes(searchedPlace.toLowerCase())
+              )
+            : locations.filter((location) =>
+                  location.name
+                      .toLowerCase()
+                      .includes(searchedCity.toLowerCase())
+              );
+
 
     return (
         <Paper elevation={3} className={classes.paper}>
@@ -39,8 +58,8 @@ const LocationList = ({ location, changeLocale, selected, formType }) => {
                 className={classes.list}
                 aria-label="location"
             >
-                {location &&
-                    location.map(({ id, name }) => (
+                {locations &&
+                    filteredLocations.map(({ id, name }) => (
                         <ListItem button key={id} selected={selected === id}>
                             {selected !== id ? (
                                 <ListItemText

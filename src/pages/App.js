@@ -1,16 +1,11 @@
 import React from 'react';
 import { Container } from '@material-ui/core/';
+import Home from './Home';
 
-import CitiesAndPlacesContainer from '../components/CitiesAndPlacesContainer';
-import GeoChart from '../components/GeoChart';
-
-export const App = () => {
-    return (
-        <Container fixed>
-            <CitiesAndPlacesContainer />
-            <GeoChart />
-        </Container>
-    );
-};
+export const App = () => (
+    <Container fixed>
+        <Home />
+    </Container>
+);
 
 export default App;

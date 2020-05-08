@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
@@ -16,19 +16,14 @@ const useStyles = makeStyles((theme) => ({
 
 const LocationForm = ({ formType }) => {
     const classes = useStyles();
-    const [typedPlace, setTypedPlace] = useState(0);
-
-    const handleChangeText = (e) => {
-        setTypedPlace(e.target.value);
-    };
 
     return (
         <Paper component="form" className={classes.root}>
             <LocationTextField
-                handleChange={handleChangeText}
-                name={formType}
+                placeholder={formType === 'Place' ? 'Type the state...' : 'Type the city...' }
+                formType={formType}
             />
-            <LocationFormActions formType={formType} inputValue={typedPlace} />
+            <LocationFormActions formType={formType}/>
         </Paper>
     );
 };

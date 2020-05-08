@@ -29,7 +29,7 @@ const Cities = () => {
                     {cities.length > 0 && (
                     <LocationList
                         formType={'City'}
-                        location={cities}
+                        locations={cities}
                         changeLocale={handleChangeCity}
                         selected={selectedCity.id}
                     />)}

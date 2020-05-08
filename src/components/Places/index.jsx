@@ -27,7 +27,7 @@ const Places = () => {
             <LocationForm formType={'Place'}/>
             {places && <LocationList
                 formType={'Place'}
-                location={places}
+                locations={places}
                 changeLocale={handleChangePlace}
                 selected={selectedPlace.id}
             />}

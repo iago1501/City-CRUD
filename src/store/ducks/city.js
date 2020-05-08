@@ -63,7 +63,12 @@ const cityReducer = (state = INITIAL_STATE, action) => {
         case Types.ADD_CITY:
             return {
                 ...state,
-                cities: [...state.cities, { ...action.payload }],
+                cities:
+                    state.cities.find(
+                        (city) => (city.name === action.payload.name && city.placeId === action.payload.placeId )
+                    )
+                        ? [...state.cities]
+                        : [...state.cities, { ...action.payload }],
             };
         case Types.REMOVE_CITY:
             return {
@@ -80,11 +85,9 @@ const cityReducer = (state = INITIAL_STATE, action) => {
         case Types.UPDATE_CITY:
             return {
                 ...state,
-                selectedPlace: '',
+                selectedCity: '',
                 cities: state.cities.map((city) =>
-                    city.id === action.payload.id
-                        ? { ...action.payload }
-                        : city
+                    city.id === action.payload.id ? { placeId: city.placeId, ...action.payload } : city
                 ),
             };
         case Types.REMOVE_CITY_BY_PLACE_ID:

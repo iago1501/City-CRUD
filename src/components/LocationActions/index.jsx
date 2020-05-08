@@ -10,14 +10,13 @@ import { removeCity, removeCityByPlaceId, updateCity } from 'store/ducks/city';
 
 const LocationActions = ({ id, formType, value }) => {
     const dispatch = useDispatch();
-    console.log(value);
     return (
         <>
             <IconButton
                 onClick={() =>
                     formType === 'Place'
                         ? dispatch(updatePlace(id, value))
-                        : dispatch(removeCity(id))
+                        : dispatch(updateCity(id, value))
                 }
                 aria-label="directions"
                 size="small"

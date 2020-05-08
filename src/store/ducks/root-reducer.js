@@ -4,16 +4,18 @@ import storage from 'redux-persist/lib/storage';
 
 import cityReducer from './city';
 import placeReducer from './place';
+import formReducer from './form';
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['reducer'],
+    whitelist: ['city', 'place'],
 };
 
 const rootReducer = combineReducers({
     city: cityReducer,
     place: placeReducer,
+    form: formReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { IconButton, Divider } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { cityMaxId, addCity } from 'store/ducks/city';
 import { placeMaxId, addPlace, selectSelectedPlace } from 'store/ducks/place';
+import { selectSearchedPlace, selectSearchedCity } from 'store/ducks/form';
 
 const useStyles = makeStyles(() => ({
     iconButton: {
@@ -19,34 +19,29 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const LocationFormActions = ({ inputValue, formType }) => {
+const LocationFormActions = ({ formType }) => {
     const classes = useStyles();
     const nextIdCity = parseInt(useSelector(cityMaxId)) + 1;
     const nextIdPlace = parseInt(useSelector(placeMaxId)) + 1;
     const selectedPlaceId = useSelector(selectSelectedPlace).id;
+    const searchedPlace = useSelector(selectSearchedPlace);
+    const searchedCity = useSelector(selectSearchedCity);
+
     const dispatch = useDispatch();
 
-    const dispatchFunction = () =>
+    const AddDispatchFunction = () =>
         formType === 'Place'
-            ? addPlace(nextIdPlace, inputValue)
-            : addCity(nextIdCity, selectedPlaceId,  inputValue);
+            ? addPlace(nextIdPlace, searchedPlace)
+            : addCity(nextIdCity, selectedPlaceId, searchedCity);
 
     return (
         <>
-            <IconButton
-                className={classes.iconButton}
-                aria-label="search"
-                name={inputValue}
-            >
-                <SearchIcon />
-            </IconButton>
             <Divider className={classes.divider} orientation="vertical" />
             <IconButton
                 color="primary"
                 className={classes.iconButton}
                 aria-label="directions"
-                name={inputValue}
-                onClick={() => dispatch(dispatchFunction()) }
+                onClick={() => dispatch(AddDispatchFunction())}
             >
                 <AddCircleIcon />
             </IconButton>
