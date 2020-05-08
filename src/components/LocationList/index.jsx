@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
     list: {
         width: '100%',
         backgroundColor: theme.palette.background.paper,
+        height: '200px',
+        overflowY: 'auto',
     },
     paper: {
         padding: theme.spacing(2),
@@ -44,7 +46,10 @@ const LocationList = ({ location, changeLocale, selected, formType }) => {
                                 <ListItemText
                                     inset
                                     primary={name}
-                                    onClick={() => {changeLocale(id, name); setInputValue(name)}}
+                                    onClick={() => {
+                                        changeLocale(id, name);
+                                        setInputValue(name);
+                                    }}
                                 />
                             ) : (
                                 <TextField
