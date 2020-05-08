@@ -33,7 +33,7 @@ const GeoChart = () => {
             <Paper elevation={3} className={classes.paper}>
                 <Chart
                     style={{ justifySelf: 'center' }}
-                    width={'600px'}
+                    width={'80%'}
                     height={'300px'}
                     chartType="Bar"
                     loader={<div>Loading Chart</div>}

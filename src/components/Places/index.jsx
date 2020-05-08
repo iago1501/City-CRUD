@@ -23,7 +23,7 @@ const Places = () => {
     );
 
     return (
-        <Grid item xs={6}>
+        <Grid item md={6} xs={12}>
             <LocationForm formType={'Place'}/>
             {places && <LocationList
                 formType={'Place'}

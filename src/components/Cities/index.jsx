@@ -23,7 +23,7 @@ const Cities = () => {
     );
 
     return (
-        <Grid item xs={6}>
+        <Grid item md={6} xs={12}>
                 <>  {selectedPlace &&
                         <LocationForm formType={'City'} />}
                     {cities.length > 0 && (
