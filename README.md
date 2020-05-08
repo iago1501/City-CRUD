@@ -12,6 +12,7 @@ To run this project you have to clone the git repository, and then run:
 1 - yarn (to install all the dependencies);
 2 - yarn start (to run the application);
 
+You can also go to "https://iago1501.github.io/city_crud" to see the aplication running in github.io
 
 ## Tecnologies and Techniques
 
