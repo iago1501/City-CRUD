@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,KACI,mEAA8C,CAC9C,qBACJ","file":"main.5eb40240.chunk.css","sourcesContent":["body{\n    background: url('./assets/wmap.jpg') no-repeat;\n    background-size: cover;\n}\n"]}
