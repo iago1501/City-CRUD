@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/city_crud/static/css/main.6ff7b80d.chunk.css",
+    "main.js": "/city_crud/static/js/main.71f18711.chunk.js",
+    "main.js.map": "/city_crud/static/js/main.71f18711.chunk.js.map",
+    "runtime-main.js": "/city_crud/static/js/runtime-main.a5e29eec.js",
+    "runtime-main.js.map": "/city_crud/static/js/runtime-main.a5e29eec.js.map",
+    "static/js/2.37770b35.chunk.js": "/city_crud/static/js/2.37770b35.chunk.js",
+    "static/js/2.37770b35.chunk.js.map": "/city_crud/static/js/2.37770b35.chunk.js.map",
+    "index.html": "/city_crud/index.html",
+    "precache-manifest.68b038101cf2a2bde97a6dee62d117d0.js": "/city_crud/precache-manifest.68b038101cf2a2bde97a6dee62d117d0.js",
+    "service-worker.js": "/city_crud/service-worker.js",
+    "static/css/main.6ff7b80d.chunk.css.map": "/city_crud/static/css/main.6ff7b80d.chunk.css.map",
+    "static/js/2.37770b35.chunk.js.LICENSE.txt": "/city_crud/static/js/2.37770b35.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/city_crud/static/media/wmap.deafa0be.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a5e29eec.js",
+    "static/js/2.37770b35.chunk.js",
+    "static/css/main.6ff7b80d.chunk.css",
+    "static/js/main.71f18711.chunk.js"
+  ]
+}
