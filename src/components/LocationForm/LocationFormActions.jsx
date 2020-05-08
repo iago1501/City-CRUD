@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { IconButton, Divider } from '@material-ui/core';
+import { IconButton, Divider, Tooltip } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { cityMaxId, addCity } from 'store/ducks/city';
@@ -37,14 +37,17 @@ const LocationFormActions = ({ formType }) => {
     return (
         <>
             <Divider className={classes.divider} orientation="vertical" />
-            <IconButton
-                color="primary"
-                className={classes.iconButton}
-                aria-label="directions"
-                onClick={() => dispatch(AddDispatchFunction())}
-            >
-                <AddCircleIcon />
-            </IconButton>
+            <Tooltip title="Add">
+                <IconButton
+                    color="primary"
+                    className={classes.iconButton}
+                    aria-label="directions"
+                    title="Adicionar"
+                    onClick={() => dispatch(AddDispatchFunction())}
+                >
+                    <AddCircleIcon />
+                </IconButton>
+            </Tooltip>
         </>
     );
 };
