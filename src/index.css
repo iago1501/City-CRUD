@@ -1,3 +1,4 @@
 body{
-    background-color: rgb(200,200,200);
+    background: url('./assets/wmap.jpg') no-repeat;
+    background-size: cover;
 }

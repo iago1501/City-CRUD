@@ -1,81 +1,98 @@
 // Selectors
 import { createSelector } from 'reselect';
 
-export const selectPlaces = (state) => state.city.places;
-export const selectSelectedPlace = (state) => state.city.selectedPlace;
+export const selectCities = (state) => state.city.cities;
 
-export const selectCities = createSelector(
-    [selectPlaces, (_, placeId) => placeId],
-    (places, placeId) =>
-        places.find((place) => place.id === placeId)
-            ? places.find((place) => place.id === placeId)?.cities
-            : null
+export const selectSelectedCity = (state) => state.city.selectedCity;
+
+export const selectedCitiesByPlace = createSelector(
+    [selectCities, (_, placeId) => placeId],
+    (cities, placeId) => cities.filter((city) => city.placeId === placeId)
 );
 
-// export const selectMaxId = createSelector([selectPlaces], (places) => {});
+export const cityMaxId = createSelector(
+    [selectCities],
+    (cities) => cities.map((city) => city.id).sort((a, b) => b - a)[0]
+);
 
 // Action Types
 
 export const Types = {
     ADD_CITY: 'city/ADD_CITY',
     REMOVE_CITY: 'city/REMOVE_CITY',
+    REMOVE_CITY_BY_PLACE_ID: 'city/REMOVE_CITY_BY_PLACE_ID',
     UPDATE_CITY: 'city/UPDATE_CITY',
-    CHANGE_PLACE: 'city/CHANGE_PLACE',
+    CHANGE_CITY: 'city/CHANGE_CITY',
 };
 
 // Reducer
 
 const INITIAL_STATE = {
-    selectedCity: {},
-    selectedPlace: {},
-    places: [
+    selectedCity: '',
+    cities: [
         {
-            id: 1,
+            id: 2,
+            placeId: 1,
             name: 'Rio de Janeiro',
-            cities: [
-                {
-                    id: 2,
-                    name: 'Rio de Janeiro',
-                },
-                {
-                    id: 3,
-                    name: 'Niterói',
-                },
-                {
-                    id: 4,
-                    name: 'Nilópolis',
-                },
-            ],
         },
         {
-            id: 5,
+            id: 3,
+            placeId: 1,
+            name: 'Niterói',
+        },
+        {
+            id: 4,
+            placeId: 1,
+            name: 'Nilópolis',
+        },
+        {
+            id: 6,
+            placeId: 2,
             name: 'São Paulo',
-            cities: [
-                {
-                    id: 6,
-                    name: 'São Paulo',
-                },
-                {
-                    id: 7,
-                    name: 'Ribeirao Preto',
-                },
-                {
-                    id: 8,
-                    name: 'Higienópolis',
-                },
-            ],
+        },
+        {
+            id: 7,
+            placeId: 2,
+            name: 'Ribeirao Preto',
         },
     ],
 };
 
-const reducer = (state = INITIAL_STATE, action) => {
+const cityReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case Types.TYPE:
-            return { ...state };
-        case Types.CHANGE_PLACE:
+        case Types.ADD_CITY:
             return {
                 ...state,
-                selectedPlace: action.payload,
+                cities: [...state.cities, { ...action.payload }],
+            };
+        case Types.REMOVE_CITY:
+            return {
+                ...state,
+                cities: state.cities.filter(
+                    (city) => city.id !== action.payload
+                ),
+            };
+        case Types.CHANGE_CITY:
+            return {
+                ...state,
+                selectedCity: action.payload,
+            };
+        case Types.UPDATE_CITY:
+            return {
+                ...state,
+                selectedPlace: '',
+                cities: state.cities.map((city) =>
+                    city.id === action.payload.id
+                        ? { ...action.payload }
+                        : city
+                ),
+            };
+        case Types.REMOVE_CITY_BY_PLACE_ID:
+            return {
+                ...state,
+                cities: state.cities.filter(
+                    (city) => city.placeId !== action.payload
+                ),
             };
         default:
             return state;
@@ -84,14 +101,29 @@ const reducer = (state = INITIAL_STATE, action) => {
 
 // Action Creators
 
-export const addCity = (value) => ({
+export const addCity = (id, placeId, name) => ({
     type: Types.ADD_CITY,
-    payload: { value },
+    payload: { id, placeId, name },
 });
 
-export const changePlace = (id, name) => ({
-    type: Types.CHANGE_PLACE,
+export const removeCity = (id) => ({
+    type: Types.REMOVE_CITY,
+    payload: id,
+});
+
+export const updateCity = (id, name) => ({
+    type: Types.UPDATE_CITY,
     payload: { id, name },
 });
 
-export default reducer;
+export const changeCity = (id, name) => ({
+    type: Types.CHANGE_CITY,
+    payload: { id, name },
+});
+
+export const removeCityByPlaceId = (placeId) => ({
+    type: Types.REMOVE_CITY_BY_PLACE_ID,
+    payload: placeId,
+});
+
+export default cityReducer;

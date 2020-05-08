@@ -1,29 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+
+import Paper from '@material-ui/core/Paper';
+import LocationTextField from './LocationTextField';
+import LocationFormActions from './LocationFormActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        '& > *': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: '10px',
     },
 }));
 
-const LocationForm = () => {
+const LocationForm = ({ formType }) => {
     const classes = useStyles();
+    const [typedPlace, setTypedPlace] = useState(0);
+
+    const handleChangeText = (e) => {
+        setTypedPlace(e.target.value);
+    };
 
     return (
-        <form className={classes.root} noValidate autoComplete="off">
-            <TextField
-                id="outlined-search"
-                label="Estado"
-                type="search"
-                variant="outlined"
-                size="small"
+        <Paper component="form" className={classes.root}>
+            <LocationTextField
+                handleChange={handleChangeText}
+                name={formType}
             />
-        </form>
+            <LocationFormActions formType={formType} inputValue={typedPlace} />
+        </Paper>
     );
 };
 

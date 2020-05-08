@@ -6,18 +6,12 @@ import {
     selectPlaces,
     changePlace,
     selectSelectedPlace,
-} from 'store/ducks/city';
+} from 'store/ducks/place';
 
 import LocationList from '../LocationList/index';
 import LocationForm from '../LocationForm/index';
 
 const Places = () => {
-    // const [input, setInput] = useState('');
-
-    // const handleChange = (e) => {
-    //     const { value } = e.target;
-    //     setInput(value);
-    // };
 
     const places = useSelector(selectPlaces);
     const selectedPlace = useSelector(selectSelectedPlace);
@@ -30,12 +24,13 @@ const Places = () => {
 
     return (
         <Grid item xs={6}>
-            <LocationForm />
-            <LocationList
+            <LocationForm formType={'Place'}/>
+            {places && <LocationList
+                formType={'Place'}
                 location={places}
-                changePlace={handleChangePlace}
+                changeLocale={handleChangePlace}
                 selected={selectedPlace.id}
-            />
+            />}
         </Grid>
     );
 };

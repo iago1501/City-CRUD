@@ -1,34 +1,40 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 
-import { selectCities, selectSelectedPlace } from 'store/ducks/city';
+import { selectedCitiesByPlace, changeCity, selectSelectedCity } from 'store/ducks/city';
+import { selectSelectedPlace } from 'store/ducks/place';
 import LocationList from '../LocationList/index';
 import LocationForm from '../LocationForm/index';
 
 const Cities = () => {
-    // const [input, setInput] = useState('');
-
-    // const handleChange = (e) => {
-    //     const { value } = e.target;
-    //     setInput(value);
-    // };
     const selectedPlace = useSelector(selectSelectedPlace);
+    const selectedCity = useSelector(selectSelectedCity);
+
     const cities = useSelector((state) =>
-        selectCities(state, selectedPlace.id)
+        selectedCitiesByPlace(state, selectedPlace.id)
+    );
+
+    const dispatch = useDispatch();
+
+    const handleChangeCity = useCallback(
+        (id, name) => dispatch(changeCity(id, name)),
+        [dispatch]
     );
 
     return (
         <Grid item xs={6}>
-            {cities && (
-                <>
-                    <LocationForm />
+                <>  {selectedPlace &&
+                        <LocationForm formType={'City'} />}
+                    {cities.length > 0 && (
                     <LocationList
+                        formType={'City'}
                         location={cities}
-                        selected={selectedPlace.id}
-                    />
+                        changeLocale={handleChangeCity}
+                        selected={selectedCity.id}
+                    />)}
                 </>
-            )}
+
         </Grid>
     );
 };
